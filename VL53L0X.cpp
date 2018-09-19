@@ -4,7 +4,7 @@
 // VL53L0X datasheet.
 
 #include <VL53L0X.h>
-#include <Wire.h>
+#include <TinyWireM.h>
 
 // Defines /////////////////////////////////////////////////////////////////////
 
@@ -281,32 +281,32 @@ bool VL53L0X::init(bool io_2v8)
 // Write an 8-bit register
 void VL53L0X::writeReg(uint8_t reg, uint8_t value)
 {
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  Wire.write(value);
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  TinyWireM.write(value);
+  last_status = TinyWireM.endTransmission();
 }
 
 // Write a 16-bit register
 void VL53L0X::writeReg16Bit(uint8_t reg, uint16_t value)
 {
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  Wire.write((value >> 8) & 0xFF); // value high byte
-  Wire.write( value       & 0xFF); // value low byte
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  TinyWireM.write((value >> 8) & 0xFF); // value high byte
+  TinyWireM.write( value       & 0xFF); // value low byte
+  last_status = TinyWireM.endTransmission();
 }
 
 // Write a 32-bit register
 void VL53L0X::writeReg32Bit(uint8_t reg, uint32_t value)
 {
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  Wire.write((value >> 24) & 0xFF); // value highest byte
-  Wire.write((value >> 16) & 0xFF);
-  Wire.write((value >>  8) & 0xFF);
-  Wire.write( value        & 0xFF); // value lowest byte
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  TinyWireM.write((value >> 24) & 0xFF); // value highest byte
+  TinyWireM.write((value >> 16) & 0xFF);
+  TinyWireM.write((value >>  8) & 0xFF);
+  TinyWireM.write( value        & 0xFF); // value lowest byte
+  last_status = TinyWireM.endTransmission();
 }
 
 // Read an 8-bit register
@@ -314,12 +314,12 @@ uint8_t VL53L0X::readReg(uint8_t reg)
 {
   uint8_t value;
 
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  last_status = TinyWireM.endTransmission();
 
-  Wire.requestFrom(address, (uint8_t)1);
-  value = Wire.read();
+  TinyWireM.requestFrom(address, (uint8_t)1);
+  value = TinyWireM.read();
 
   return value;
 }
@@ -329,13 +329,13 @@ uint16_t VL53L0X::readReg16Bit(uint8_t reg)
 {
   uint16_t value;
 
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  last_status = TinyWireM.endTransmission();
 
-  Wire.requestFrom(address, (uint8_t)2);
-  value  = (uint16_t)Wire.read() << 8; // value high byte
-  value |=           Wire.read();      // value low byte
+  TinyWireM.requestFrom(address, (uint8_t)2);
+  value  = (uint16_t)TinyWireM.read() << 8; // value high byte
+  value |=           TinyWireM.read();      // value low byte
 
   return value;
 }
@@ -345,15 +345,15 @@ uint32_t VL53L0X::readReg32Bit(uint8_t reg)
 {
   uint32_t value;
 
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  last_status = TinyWireM.endTransmission();
 
-  Wire.requestFrom(address, (uint8_t)4);
-  value  = (uint32_t)Wire.read() << 24; // value highest byte
-  value |= (uint32_t)Wire.read() << 16;
-  value |= (uint16_t)Wire.read() <<  8;
-  value |=           Wire.read();       // value lowest byte
+  TinyWireM.requestFrom(address, (uint8_t)4);
+  value  = (uint32_t)TinyWireM.read() << 24; // value highest byte
+  value |= (uint32_t)TinyWireM.read() << 16;
+  value |= (uint16_t)TinyWireM.read() <<  8;
+  value |=           TinyWireM.read();       // value lowest byte
 
   return value;
 }
@@ -362,30 +362,30 @@ uint32_t VL53L0X::readReg32Bit(uint8_t reg)
 // starting at the given register
 void VL53L0X::writeMulti(uint8_t reg, uint8_t const * src, uint8_t count)
 {
-  Wire.beginTransmission(address);
-  Wire.write(reg);
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
 
   while (count-- > 0)
   {
-    Wire.write(*(src++));
+    TinyWireM.write(*(src++));
   }
 
-  last_status = Wire.endTransmission();
+  last_status = TinyWireM.endTransmission();
 }
 
 // Read an arbitrary number of bytes from the sensor, starting at the given
 // register, into the given array
 void VL53L0X::readMulti(uint8_t reg, uint8_t * dst, uint8_t count)
 {
-  Wire.beginTransmission(address);
-  Wire.write(reg);
-  last_status = Wire.endTransmission();
+  TinyWireM.beginTransmission(address);
+  TinyWireM.write(reg);
+  last_status = TinyWireM.endTransmission();
 
-  Wire.requestFrom(address, count);
+  TinyWireM.requestFrom(address, count);
 
   while (count-- > 0)
   {
-    *(dst++) = Wire.read();
+    *(dst++) = TinyWireM.read();
   }
 }
 
