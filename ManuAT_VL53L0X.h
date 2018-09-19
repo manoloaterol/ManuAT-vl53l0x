@@ -1,5 +1,5 @@
-#ifndef VL53L0X_h
-#define VL53L0X_h
+#ifndef MANUAT_VL53L0X_h
+#define MANUAT_VL53L0X_h
 
 #include <Arduino.h>
 
