@@ -59,6 +59,10 @@ void VL53L0X::setAddress(uint8_t new_addr)
 // mode.
 bool VL53L0X::init(bool io_2v8)
 {
+  
+  TinyWireM.begin();
+
+
   // VL53L0X_DataInit() begin
 
   // sensor uses 1V8 mode for I/O by default; switch to 2V8 mode if necessary
