@@ -160,6 +160,4 @@ This library is intended to provide a quicker and easier way to get started usin
 
 ## Version history
 
-* 1.0.2 (2017 Jun 27): Fixed a typo in a register modification in `getSpadInfo()` (thanks @tridge).
-* 1.0.1 (2016 Dec 08): Fixed type error in `readReg32Bit()`.
-* 1.0.0 (2016 Aug 12): Original release.
+* 1.0.0 (2018 Sept 20): Initial release.
