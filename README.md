@@ -1,13 +1,14 @@
-# VL53L0X library for Arduino
+# VL53L0X library for Arduino using TinyWireM for I2C communication
 
-Version: 1.0.2<br>
-Release date: 2017 Jun 27<br>
-[![Build Status](https://travis-ci.org/pololu/vl53l0x-arduino.svg?branch=master)](https://travis-ci.org/pololu/vl53l0x-arduino)<br>
-[www.pololu.com](https://www.pololu.com/)
+Version: 1.0.0<br>
+Release date: 2018 Sep 20<br>
+
 
 ## Summary
 
 This is a library for the Arduino IDE that helps interface with ST's [VL53L0X time-of-flight distance sensor](https://www.pololu.com/product/2490). The library makes it simple to configure the sensor and read range data from it via I&sup2;C.
+
+These library is based on the work made by [Pololu](https://github.com/pololu/vl53l0x-arduino), and modified to use [TinyWireM](https://github.com/adafruit/TinyWireM) library for the I2C protocol communication. This allows to use the library on Atmel's AVR Attiny family due to the size reduction.
 
 ## Supported platforms
 

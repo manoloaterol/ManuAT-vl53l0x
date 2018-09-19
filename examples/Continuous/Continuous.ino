@@ -4,15 +4,13 @@ vl53l0x_ContinuousRanging_Example.c from the VL53L0X API.
 
 The range readings are in units of mm. */
 
-#include <Wire.h>
-#include <VL53L0X.h>
+#include <ManuAT_VL53L0X.h>
 
 VL53L0X sensor;
 
 void setup()
 {
   Serial.begin(9600);
-  Wire.begin();
 
   sensor.init();
   sensor.setTimeout(500);

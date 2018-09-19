@@ -1,4 +1,4 @@
-/* This example shows how to get single-shot range
+ /* This example shows how to get single-shot range
  measurements from the VL53L0X. The sensor can optionally be
  configured with different ranging profiles, as described in
  the VL53L0X API user manual, to get better performance for
@@ -7,8 +7,7 @@
 
  The range readings are in units of mm. */
 
-#include <Wire.h>
-#include <VL53L0X.h>
+#include <ManuAT_VL53L0X.h>
 
 VL53L0X sensor;
 
@@ -34,7 +33,6 @@ VL53L0X sensor;
 void setup()
 {
   Serial.begin(9600);
-  Wire.begin();
 
   sensor.init();
   sensor.setTimeout(500);
